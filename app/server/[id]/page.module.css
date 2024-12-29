@@ -1,0 +1,51 @@
+.statsArray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.statsCard {
+  flex: 1;
+  padding: 1rem 0;
+  min-width: 300px;
+}
+
+.statsCardBody {
+  align-items: center;
+}
+
+.statValue {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ownerStat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.actionsPanel {
+  display: flex;
+  gap: 1rem;
+}
+
+.actionsPanel > * {
+  flex: 1;
+  min-width: 300;
+}
+
+.form {
+  flex: 1;
+}
+
+.formSubmit {
+  margin-top: auto;
+  width: 100%;
+}

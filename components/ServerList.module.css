@@ -1,0 +1,39 @@
+.serverList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  flex: 1;
+  min-width: 300px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.serverInfo {
+  padding: 0.3rem 0;
+}
+
+.cardBackground {
+  position: absolute;
+  object-fit: cover;
+  transform: translate(0%, -50%);
+  filter: blur(10px) brightness(0.5);
+  transition: 200ms;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card:hover .cardBackground {
+  filter: blur(10px) brightness(0.8);
+  scale: 1.2;
+  transition: 200ms;
+}
