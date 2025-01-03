@@ -1,12 +1,13 @@
+import { connection } from "next/server";
 import { Server } from "../types/Server";
 
-const url = "http://localhost:8080";
+
+const url = "http://192.168.1.168:8080";
 
 export async function getServers(): Promise<Server[]> {
   try {
     const response = await fetch(`${url}/servers`);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

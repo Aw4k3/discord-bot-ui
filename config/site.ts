@@ -8,11 +8,19 @@ export const siteConfig = {
       label: "Servers",
       href: "/",
     },
+    {
+      label: "Dashboard",
+      href: "/dashboard",
+    },
   ],
   navMenuItems: [
     {
       label: "Servers",
       href: "/",
+    },
+    {
+      label: "Dashboard",
+      href: "/dashboard",
     },
   ],
   links: {

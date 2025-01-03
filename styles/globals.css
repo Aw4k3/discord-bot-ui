@@ -5,8 +5,10 @@
 h1 {
   font-size: x-large;
   font-weight: bold;
+  z-index: 0;
 }
 
 h2 {
   font-weight: bold;
+  z-index: 0;
 }

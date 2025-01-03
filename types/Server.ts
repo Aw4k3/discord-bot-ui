@@ -5,14 +5,18 @@ export type Server = {
   memberCount: number;
   createdTimestamp: number;
   joinedTimestamp: number;
-  owner: {
-    id: string;
-    name: string;
-    avatarUrl: string;
-  };
-  channels: {
-    id: string;
-    name: string;
-    type: "GuildText" | "GuildVoice" | "GuildCategory";
-  }[];
+  owner: Owner;
+  channels: Channel[];
+};
+
+export type Channel = {
+  id: string;
+  name: string;
+  type: "GuildText" | "GuildVoice" | "GuildCategory";
+};
+
+export type Owner = {
+  id: string;
+  name: string;
+  avatarUrl: string;
 };

@@ -1,49 +1,56 @@
-"use client";
-
-import { getServer, joinVoiceChannel, sendMessage } from "@/services/api";
+import { getServer } from "@/services/api";
 import styles from "./page.module.css";
 import { Card, CardBody } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
-import { useEffect, useState } from "react";
-import { Server } from "@/types/Server";
-import { useParams } from "next/navigation";
-import { Button } from "@nextui-org/button";
-import { Form } from "@nextui-org/form";
-import { Input } from "@nextui-org/input";
-import { Select, SelectItem } from "@nextui-org/select";
-import { BackIcon, HashTag, SpeakerIcon } from "@/components/icons";
+import { BackIcon } from "@/components/icons";
 import Link from "next/link";
+import SendMessage from "@/components/actions/SendMessage";
+import JoinVoiceChannel from "@/components/actions/JoinVoiceChannel";
+import { getAverageColor } from "fast-average-color-node";
+import { argbFromHex, hexFromArgb, themeFromSourceColor, TonalPalette } from "@material/material-color-utilities";
+import ColourChip from "@/components/ColourChip";
+import { radialGradient } from "motion/dist/react-client";
 
-export default function ServerDetails() {
-  // const server = await getServer((await params).id);
-  const params = useParams<{ id: string }>();
-  const [server, setServer] = useState<Server>();
-  const [message, setMessage] = useState<string>("");
-  const [textChannelId, setTextChannelId] = useState<string>("");
-  const [voiceChannelId, setVoiceChannelId] = useState<string>("");
-
-  useEffect(() => {
-    getServer(params.id).then((result) => setServer(result as Server));
-  }, []);
+export default async function ServerDetails({ params }: { params: Promise<{ id: string }> }) {
+  const server = await getServer((await params).id);
 
   if (!server) {
     return <div>Server not found</div>;
   }
 
+  const baseColour = await getAverageColor(server.iconUrl);
+  const theme = themeFromSourceColor(argbFromHex(baseColour.hex));
+  const colourKeys: string[] = Object.keys(theme.palettes);
+  const palettes: TonalPalette[] = Object.values(theme.palettes);
+
   return (
     <section className="flex flex-col gap-4 md:py-6">
+      <div
+        className={styles.leftSpotLight}
+        style={{
+          background: `radial-gradient(circle, ${hexFromArgb(theme.palettes.primary.keyColor.toInt())} 0%, rgba(0, 0, 0, 0) 70%)`,
+        }}
+      ></div>
+      <div
+        className={styles.rightSpotLight}
+        style={{
+          background: `radial-gradient(circle, ${hexFromArgb(theme.palettes.secondary.keyColor.toInt())} 0%, rgba(0, 0, 0, 0) 70%)`,
+        }}
+      ></div>
       <header className={styles.header}>
-        <Link href={"/"}>
-          <BackIcon fill="white"/>
-        </Link>
-        <Image src={server.iconUrl} alt="Server Icon" radius="full" height={48} />
-        <h1>{server.name}</h1>
+        <div className={styles.subHeader}>
+          <Link href={"/"}>
+            <BackIcon fill="white" />
+          </Link>
+          <Image src={server.iconUrl} alt="Server Icon" radius="full" height={48} />
+          <h1>{server.name}</h1>
+        </div>
       </header>
       <section className={styles.statsArray}>
         <Card className={styles.statsCard}>
           <CardBody className={styles.statsCardBody}>
             <div className={styles.ownerStat}>
-              <Image src={server.owner.avatarUrl} alt="Owner Avatar" radius="full" height={72} />
+              <Image src={server.owner.avatarUrl} alt="Owner Avatar" radius="full" style={{maxHeight: 72}} />
               <p className={styles.statValue}>{server.owner.name}</p>
             </div>
             <p>Owner</p>
@@ -74,65 +81,20 @@ export default function ServerDetails() {
         <h1>Actions</h1>
       </header>
       <section className={styles.actionsPanel}>
-        <Card>
-          <CardBody>
-            <Form
-              className={styles.form}
-              onSubmit={(e) => {
-                e.preventDefault();
-                sendMessage(textChannelId, message);
-              }}
-            >
-              <h2>Send Message</h2>
-              <Input name="message" label="Message" onValueChange={setMessage} isClearable isRequired />
-              <Select name="channel" label="Channel" isRequired onChange={(e) => setTextChannelId(e.target.value)}>
-                {server.channels
-                  .filter((channel) => channel.type === "GuildText")
-                  .map((channel) => (
-                    <SelectItem key={channel.id} value={channel.id} startContent={<HashTag fill="#ccc" />}>
-                      {channel.name}
-                    </SelectItem>
-                  ))}
-              </Select>
-              <Button
-                className={styles.formSubmit}
-                type="submit"
-                isDisabled={!(textChannelId && message)}
-                color="primary"
-              >
-                Send
-              </Button>
-            </Form>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardBody>
-            <Form
-              className={styles.form}
-              onSubmit={(e) => {
-                e.preventDefault();
-                joinVoiceChannel(voiceChannelId);
-              }}
-            >
-              <h2>Join Voice Channel</h2>
-              <Select name="channel" label="Channel" isRequired onChange={(e) => setVoiceChannelId(e.target.value)}>
-                {server.channels
-                  .filter((channel) => channel.type === "GuildVoice")
-                  .map((channel) => (
-                    <SelectItem key={channel.id} value={channel.id} startContent={<SpeakerIcon fill="#ccc" />}>
-                      {channel.name}
-                    </SelectItem>
-                  ))}
-              </Select>
-              <Button
-                className={styles.formSubmit}
-                type="submit"
-                isDisabled={!(voiceChannelId)}
-                color="primary"
-              >
-                Join
-              </Button>
-            </Form>
+        <SendMessage channels={server.channels} />
+        <JoinVoiceChannel channels={server.channels} />
+      </section>
+      <header className={styles.header}>
+        <h1>Colour Palette from Icon</h1>
+      </header>
+      <section>
+        <Card isBlurred>
+          <CardBody className={styles.palette}>
+            {palettes.map((palette, index) =>
+              colourKeys[index] !== "error" ? (
+                <ColourChip key={colourKeys[index]} label={colourKeys[index]} tonalPalette={palette} />
+              ) : null
+            )}
           </CardBody>
         </Card>
       </section>

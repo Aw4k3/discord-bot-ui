@@ -1,0 +1,11 @@
+.container {
+  border-radius: .5rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  padding: 1rem;
+}

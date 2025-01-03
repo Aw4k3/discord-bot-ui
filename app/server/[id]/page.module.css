@@ -8,6 +8,7 @@
   flex: 1;
   padding: 1rem 0;
   min-width: 300px;
+  background-color: transparent;
 }
 
 .statsCardBody {
@@ -22,6 +23,14 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 0;
+}
+
+.subHeader {
+  display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -33,19 +42,73 @@
 
 .actionsPanel {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .actionsPanel > * {
   flex: 1;
   min-width: 300;
+  background-color: transparent;
 }
 
-.form {
-  flex: 1;
+.palette {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.formSubmit {
-  margin-top: auto;
-  width: 100%;
+.leftSpotLight {
+  position: fixed;
+  width: 100vw;
+  aspect-ratio: 1;
+  bottom: -10vw;
+  left: -30vw;
+}
+
+.rightSpotLight {
+  position: fixed;
+  width: 100vw;
+  aspect-ratio: 1;
+  top: -10vw;
+  right: -30vw;
+}
+
+@media screen and (max-width: 1024px) {
+  .leftSpotLight {
+    width: 150vh;
+    bottom: 20vw;
+    left: -40vw;
+  }
+  
+  .rightSpotLight {
+    width: 150vh;
+    top: 20vw;
+    right: -40vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .leftSpotLight {
+    bottom: 30vw;
+    left: -40vw;
+  }
+  
+  .rightSpotLight {
+    top: 30vw;
+    right: -40vw;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .leftSpotLight {
+    bottom: 30vw;
+    left: -100vw;
+  }
+  
+  .rightSpotLight {
+    top: 30vw;
+    right: -100vw;
+  }
 }
