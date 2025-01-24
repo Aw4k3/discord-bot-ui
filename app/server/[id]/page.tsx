@@ -1,7 +1,7 @@
 import { getServer } from "@/services/api";
 import styles from "./page.module.css";
-import { Card, CardBody } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
+import { Card, CardBody } from "@heroui/card";
+import { Image } from "@heroui/image";
 import { BackIcon } from "@/components/icons";
 import Link from "next/link";
 import SendMessage from "@/components/actions/SendMessage";
@@ -9,7 +9,6 @@ import JoinVoiceChannel from "@/components/actions/JoinVoiceChannel";
 import { getAverageColor } from "fast-average-color-node";
 import { argbFromHex, hexFromArgb, themeFromSourceColor, TonalPalette } from "@material/material-color-utilities";
 import ColourChip from "@/components/ColourChip";
-import { radialGradient } from "motion/dist/react-client";
 
 export default async function ServerDetails({ params }: { params: Promise<{ id: string }> }) {
   const server = await getServer((await params).id);

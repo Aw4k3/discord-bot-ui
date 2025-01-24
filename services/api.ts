@@ -1,8 +1,10 @@
 import { connection } from "next/server";
 import { Server } from "../types/Server";
+import { LogLine } from "@/types/LogLine";
 
 
 const url = "http://192.168.1.169:8080";
+const devUrl = "http://localhost:8080";
 
 export async function getServers(): Promise<Server[]> {
   try {
@@ -55,4 +57,15 @@ export async function joinVoiceChannel(channelId: string) {
       voiceChannelId: channelId,
     }),
   });
+}
+
+export async function getLogHistory(): Promise<LogLine[]> {
+  try {
+    const response = await fetch(`${devUrl}/logs`);
+    const data = await response.json();
+    return data as LogLine[];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }

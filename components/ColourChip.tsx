@@ -1,6 +1,6 @@
 import { argbFromHex, hexFromArgb, TonalPalette } from "@material/material-color-utilities";
 import styles from "./ColourChip.module.css";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Tooltip } from "@heroui/tooltip";
 
 export default function ColourChip({ label, tonalPalette }: { label: string; tonalPalette: TonalPalette }) {
   const hex = hexFromArgb(tonalPalette.keyColor.toInt());

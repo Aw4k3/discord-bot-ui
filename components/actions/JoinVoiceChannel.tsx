@@ -1,10 +1,10 @@
 "use client";
 
 import { joinVoiceChannel } from "@/services/api";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody } from "@nextui-org/card";
-import { Form } from "@nextui-org/form";
-import { Select, SelectItem } from "@nextui-org/select";
+import { Button } from "@heroui/button";
+import { Card, CardBody } from "@heroui/card";
+import { Form } from "@heroui/form";
+import { Select, SelectItem } from "@heroui/select";
 import { SpeakerIcon } from "../icons";
 import { useState } from "react";
 import { Channel } from "@/types/Server";

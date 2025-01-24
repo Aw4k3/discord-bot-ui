@@ -2,11 +2,11 @@
 
 import { sendMessage } from "@/services/api";
 import { Channel, Server } from "@/types/Server";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody } from "@nextui-org/card";
-import { Form } from "@nextui-org/form";
-import { Input } from "@nextui-org/input";
-import { Select, SelectItem } from "@nextui-org/select";
+import { Button } from "@heroui/button";
+import { Card, CardBody } from "@heroui/card";
+import { Form } from "@heroui/form";
+import { Input } from "@heroui/input";
+import { Select, SelectItem } from "@heroui/select";
 import { HashTag } from "../icons";
 import { useState } from "react";
 import styles from "./Actions.module.css";

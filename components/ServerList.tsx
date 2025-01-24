@@ -1,8 +1,8 @@
 "use client";
 
 import { Server } from "@/types/Server";
-import { Card, CardBody } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
+import { Card, CardBody } from "@heroui/card";
+import { Image } from "@heroui/image";
 import Link from "next/link";
 import styles from "./ServerList.module.css";
 import { useState } from "react";
