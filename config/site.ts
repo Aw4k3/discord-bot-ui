@@ -5,22 +5,30 @@ export const siteConfig = {
   description: "FakeAwake Discord Bot",
   navItems: [
     {
+      label: "Dashboard",
+      href: "/dashboard",
+    },
+    {
       label: "Servers",
       href: "/",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
+      label: "Logs",
+      href: "/logs",
     },
   ],
   navMenuItems: [
     {
+      label: "Dashboard",
+      href: "/dashboard",
+    },
+    {
       label: "Servers",
       href: "/",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
+      label: "Logs",
+      href: "/logs",
     },
   ],
   links: {

@@ -2,7 +2,7 @@ import { connection } from "next/server";
 import { Server } from "../types/Server";
 
 
-const url = "http://192.168.1.168:8080";
+const url = "http://192.168.1.169:8080";
 
 export async function getServers(): Promise<Server[]> {
   try {
